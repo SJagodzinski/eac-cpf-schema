@@ -29,10 +29,11 @@
   *****************************************************************
   
 -->
-<xs:schema xmlns:eac="http://www.archivists.org/ns/v2/eac"
+<!-- SiJa: Changed target ns address to get in work in general. Needs to be changed finally -->
+<xs:schema xmlns:eac="urn:isbn:1-931666-33-4"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            elementFormDefault="qualified"
-           targetNamespace="http://www.archivists.org/ns/v2/eac">
+           targetNamespace="urn:isbn:1-931666-33-4">
    <xs:element name="eac">
       <xs:complexType>
          <xs:sequence>
@@ -74,9 +75,9 @@
                      name="representation"
                      minOccurs="0"
                      maxOccurs="unbounded"/>
-         <xs:element type="eac:maintenanceStatus" name="maintenanceStatus"/>
+         <!--<xs:element type="eac:maintenanceStatus" name="maintenanceStatus"/>-->
          <xs:element type="eac:maintenanceAgency" name="maintenanceAgency"/>
-         <xs:element type="eac:publicationStatus" name="publicationStatus" minOccurs="0"/>
+        <!-- <xs:element type="eac:publicationStatus" name="publicationStatus" minOccurs="0"/>-->
          <xs:element type="eac:languageDeclaration"
                      name="languageDeclaration"
                      minOccurs="0"
@@ -157,6 +158,30 @@
             <xs:restriction base="xs:token">
                <xs:enumeration value="iso15511"/>
                <xs:enumeration value="otherRepositoryEncoding"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="maintanceStatus" use="required">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:enumeration value="revised"/>
+               <xs:enumeration value="deleted"/>
+               <xs:enumeration value="new"/>
+               <xs:enumeration value="deleted-split"/>
+               <xs:enumeration value="deleted-merged"/>
+               <xs:enumeration value="deleted-replaced"/>
+               <xs:enumeration value="cancelled"/>
+               <xs:enumeration value="derived"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+<!--  change use to optional    -->
+      <xs:attribute name="publicationStatus">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:enumeration value="approved"/>
+               <xs:enumeration value="published"/>
+               <xs:enumeration value="inProcess"/>
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
@@ -241,6 +266,9 @@
       <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:attribute name="localType" type="xs:anyURI"/>
       <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="representation" mixed="true">
@@ -266,7 +294,7 @@
       <xs:attribute name="linkTitle" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-   <xs:complexType name="maintenanceStatus">
+  <!-- changed to attribute in control <xs:complexType name="maintenanceStatus">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -291,14 +319,15 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
-   </xs:complexType>
+   </xs:complexType>-->
    <xs:complexType name="maintenanceAgency">
       <xs:sequence>
-         <xs:choice minOccurs="0" maxOccurs="unbounded">
+<!--   either agencyCode or agencyName must used     -->
+         <xs:choice>
             <xs:element type="eac:agencyCode" name="agencyCode"/>
-            <xs:element type="eac:otherAgencyCode" name="otherAgencyCode"/>
-            <xs:element type="eac:agencyName" name="agencyName"/>
+            <xs:element type="eac:agencyName" name="agencyName" maxOccurs="unbounded"/>
          </xs:choice>
+         <xs:element type="eac:otherAgencyCode" name="otherAgencyCode" minOccurs="0" maxOccurs="unbounded"/>
          <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
@@ -318,16 +347,14 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
-      <xs:attribute name="countryCode">
-         <xs:simpleType>
-            <xs:restriction base="xs:token">
-               <xs:pattern value="^[A-Z]{2,3}$|^[0-9]{2,3}$"/>
-            </xs:restriction>
-         </xs:simpleType>
-      </xs:attribute>
+<!-- data type changed to NMTOKEN     -->
+      <xs:attribute name="countryCode" type="xs:NMTOKEN"/>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-   <xs:complexType name="publicationStatus">
+   <!-- changed to attribute <xs:complexType name="publicationStatus">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -347,7 +374,7 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
-   </xs:complexType>
+   </xs:complexType>-->
    <xs:complexType name="languageDeclaration">
       <xs:sequence>
          <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
@@ -368,13 +395,16 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="scriptCode" use="required">
+<!--      added global lang & script attributes -->
+      <xs:attribute name="languageOfElement">
          <xs:simpleType>
             <xs:restriction base="xs:token">
-               <xs:pattern value="[A-Z]{1}[a-z]{3}"/>
+               <xs:pattern value="[a-z]{2}.*"/>
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="scriptCode" type="xs:NMTOKEN"/>
+      <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="conventionDeclaration">
@@ -401,6 +431,10 @@
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:attribute name="localType" type="xs:anyURI"/>
+      <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="rightsDeclaration">
@@ -427,6 +461,9 @@
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:attribute name="localType" type="xs:anyURI"/>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="localTypeDeclaration">
@@ -453,6 +490,9 @@
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:attribute name="localType" type="xs:anyURI"/>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="localControl">
@@ -480,7 +520,12 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
-      <xs:attribute name="localType" use="required" type="xs:anyURI"/>
+<!--      occurance changed to optional -->
+      <xs:attribute name="localType" type="xs:anyURI"/>
+      <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="maintenanceHistory">
@@ -509,8 +554,10 @@
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="sources">
+      <!--  descriptiveNote added    -->
       <xs:sequence>
          <xs:element type="eac:source" name="source" maxOccurs="unbounded"/>
+         <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
@@ -674,6 +721,9 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="otherAgencyCode" mixed="true">
@@ -693,7 +743,19 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="localType" type="xs:anyURI"/>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="status">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:enumeration value="authorized"/>
+               <xs:enumeration value="alternative"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="agencyName" mixed="true">
@@ -749,6 +811,15 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
+<!--      lang attr added -->
+      <xs:attribute name="languageOfElement">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:pattern value="[a-z]{2}.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="reference" mixed="true">
@@ -778,6 +849,7 @@
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="term" mixed="true">
+<!--  Ref attr added    -->
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -787,26 +859,17 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="lastDateTimeVerified">
+      <xs:attribute name="languageOfElement">
          <xs:simpleType>
-            <xs:union memberTypes="xs:gYear xs:gYearMonth xs:date xs:dateTime"/>
-         </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="vocabularySource" type="xs:token"/>
-      <xs:attribute name="vocabularySourceURI">
-         <xs:simpleType>
-            <xs:restriction base="xs:anyURI">
-               <xs:pattern value="http[s]?://.*"/>
+            <xs:restriction base="xs:token">
+               <xs:pattern value="[a-z]{2}.*"/>
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="valueURI">
-         <xs:simpleType>
-            <xs:restriction base="xs:anyURI">
-               <xs:pattern value="http[s]?://.*"/>
-            </xs:restriction>
-         </xs:simpleType>
-      </xs:attribute>
+      <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="date" mixed="true">
@@ -873,9 +936,11 @@
    </xs:complexType>
    <xs:complexType name="maintenanceEvent">
       <xs:sequence>
-         <xs:element type="eac:eventType" name="eventType"/>
+       <!--  eac:eventType becomes attribute in maintenceevent
+         <xs:element type="eac:eventType" name="eventType"/>-->
          <xs:element type="eac:eventDateTime" name="eventDateTime"/>
-         <xs:element type="eac:agentType" name="agentType"/>
+        <!--   eac:agentType becomes attribute in maintenanceevent       
+         <xs:element type="eac:agentType" name="agentType"/>-->
          <xs:element type="eac:agent" name="agent"/>
          <xs:element type="eac:eventDescription"
                      name="eventDescription"
@@ -883,6 +948,16 @@
                      maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
+<!--      new attribute -->
+      <xs:attribute name="agentType" use="required">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:enumeration value="human"/>
+               <xs:enumeration value="machine"/>
+               <xs:enumeration value="unknown"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="audience">
          <xs:simpleType>
             <xs:restriction base="xs:token">
@@ -899,11 +974,26 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="maintenanceEventType" use="required">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:enumeration value="cancelled"/>
+               <xs:enumeration value="created"/>
+               <xs:enumeration value="deleted"/>
+               <xs:enumeration value="derived"/>
+               <xs:enumeration value="revised"/>
+               <xs:enumeration value="unknown"/>
+               <xs:enumeration value="updated"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="source">
       <xs:sequence>
-         <xs:element type="eac:sourceEntry" name="sourceEntry"/>
+<!--         use reference instead of sourcEntry -->
+         <!--<xs:element type="eac:sourceEntry" name="sourceEntry"/>-->
+         <xs:element type="eac:reference" name="reference" minOccurs="0" maxOccurs="unbounded"/>
          <xs:element type="eac:citedRange"
                      name="citedRange"
                      minOccurs="0"
@@ -936,6 +1026,9 @@
             <xs:union memberTypes="xs:gYear xs:gYearMonth xs:date xs:dateTime"/>
          </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="identityId" mixed="true">
@@ -1551,7 +1644,7 @@
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-   <xs:complexType name="eventType">
+ <!--  <xs:complexType name="eventType">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1575,8 +1668,9 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
-   </xs:complexType>
-   <xs:complexType name="eventDateTime">
+   </xs:complexType>-->
+<!--   allow eventDateTime to contain text -->
+   <xs:complexType name="eventDateTime" mixed="true">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1601,7 +1695,7 @@
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-   <xs:complexType name="agentType">
+<!--   <xs:complexType name="agentType">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1621,7 +1715,7 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
-   </xs:complexType>
+   </xs:complexType>-->
    <xs:complexType name="agent" mixed="true">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
@@ -1662,7 +1756,9 @@
       <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-   <xs:complexType name="sourceEntry" mixed="true">
+<!--   use reference instead of sourceEntry-->
+   
+  <!-- <xs:complexType name="sourceEntry" mixed="true">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1679,9 +1775,12 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
-   </xs:complexType>
+   </xs:complexType>-->
    <xs:complexType name="citedRange" mixed="true">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
@@ -1693,6 +1792,14 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="unit" type="xs:token"/>
+      <xs:attribute name="languageOfElement">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:pattern value="[a-z]{2}.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="objectXMLWrap">
@@ -2334,13 +2441,8 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="countryCode">
-         <xs:simpleType>
-            <xs:restriction base="xs:token">
-               <xs:pattern value="^[A-Z]{2,3}$|^[0-9]{2,3}$"/>
-            </xs:restriction>
-         </xs:simpleType>
-      </xs:attribute>
+      <!-- data type changed to NMTOKEN     -->
+      <xs:attribute name="countryCode" type="xs:NMTOKEN"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="item" mixed="true">
@@ -2603,4 +2705,10 @@
       <xs:attribute name="localType" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
+<!--<!-\-   new vocabulary source attributes -\->
+   <xs:attributeGroup name="am.URIs">
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
+   </xs:attributeGroup>-->
 </xs:schema>
