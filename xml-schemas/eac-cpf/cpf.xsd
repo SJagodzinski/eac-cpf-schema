@@ -30,10 +30,8 @@
   
 -->
 <!-- SiJa: Changed target ns address to get in work in general. Needs to be changed finally -->
-<xs:schema xmlns:eac="urn:isbn:1-931666-33-4"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           elementFormDefault="qualified"
-           targetNamespace="urn:isbn:1-931666-33-4">
+<xs:schema xmlns:eac="urn:isbn:1-931666-33-4" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   elementFormDefault="qualified" targetNamespace="urn:isbn:1-931666-33-4">
    <xs:element name="eac">
       <xs:complexType>
          <xs:sequence>
@@ -67,37 +65,22 @@
    <xs:complexType name="control">
       <xs:sequence>
          <xs:element type="eac:recordId" name="recordId"/>
-         <xs:element type="eac:otherRecordId"
-                     name="otherRecordId"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
-         <xs:element type="eac:representation"
-                     name="representation"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:otherRecordId" name="otherRecordId" minOccurs="0"
+            maxOccurs="unbounded"/>
+         <xs:element type="eac:representation" name="representation" minOccurs="0"
+            maxOccurs="unbounded"/>
          <!--<xs:element type="eac:maintenanceStatus" name="maintenanceStatus"/>-->
          <xs:element type="eac:maintenanceAgency" name="maintenanceAgency"/>
-        <!-- <xs:element type="eac:publicationStatus" name="publicationStatus" minOccurs="0"/>-->
-         <xs:element type="eac:languageDeclaration"
-                     name="languageDeclaration"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
-         <xs:element type="eac:conventionDeclaration"
-                     name="conventionDeclaration"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
-         <xs:element type="eac:rightsDeclaration"
-                     name="rightsDeclaration"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
-         <xs:element type="eac:localTypeDeclaration"
-                     name="localTypeDeclaration"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
-         <xs:element type="eac:localControl"
-                     name="localControl"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <!-- <xs:element type="eac:publicationStatus" name="publicationStatus" minOccurs="0"/>-->
+         <xs:element type="eac:languageDeclaration" name="languageDeclaration" minOccurs="0"
+            maxOccurs="unbounded"/>
+         <xs:element type="eac:conventionDeclaration" name="conventionDeclaration" minOccurs="0"
+            maxOccurs="unbounded"/>
+         <xs:element type="eac:rightsDeclaration" name="rightsDeclaration" minOccurs="0"
+            maxOccurs="unbounded"/>
+         <xs:element type="eac:localTypeDeclaration" name="localTypeDeclaration" minOccurs="0"
+            maxOccurs="unbounded"/>
+         <xs:element type="eac:localControl" name="localControl" minOccurs="0" maxOccurs="unbounded"/>
          <xs:element type="eac:maintenanceHistory" name="maintenanceHistory"/>
          <xs:element type="eac:sources" name="sources" minOccurs="0"/>
       </xs:sequence>
@@ -175,7 +158,7 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
-<!--  change use to optional    -->
+      <!--  change use to optional    -->
       <xs:attribute name="publicationStatus">
          <xs:simpleType>
             <xs:restriction base="xs:token">
@@ -204,14 +187,23 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="base" type="xs:anyURI"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
+      <xs:attribute name="languageOfElement">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:pattern value="[a-z]{2}.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="multipleIdentities">
       <xs:sequence>
          <xs:element type="eac:cpfDescription" name="cpfDescription"/>
-         <xs:element type="eac:cpfDescription"
-                     name="cpfDescription"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:cpfDescription" name="cpfDescription" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
@@ -271,6 +263,7 @@
       <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
+<!--   remove @localType-->
    <xs:complexType name="representation" mixed="true">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
@@ -294,7 +287,7 @@
       <xs:attribute name="linkTitle" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-  <!-- changed to attribute in control <xs:complexType name="maintenanceStatus">
+   <!-- changed to attribute in control <xs:complexType name="maintenanceStatus">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -322,12 +315,14 @@
    </xs:complexType>-->
    <xs:complexType name="maintenanceAgency">
       <xs:sequence>
-<!--   either agencyCode or agencyName must used     -->
+         <!--   either agencyCode or agencyName must used     -->
          <xs:choice>
             <xs:element type="eac:agencyCode" name="agencyCode"/>
-            <xs:element type="eac:agencyName" name="agencyName" maxOccurs="unbounded"/>
+            <xs:element type="eac:agencyName" name="agencyName"/>
          </xs:choice>
-         <xs:element type="eac:otherAgencyCode" name="otherAgencyCode" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element type="eac:agencyName" name="agencyName" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element type="eac:otherAgencyCode" name="otherAgencyCode" minOccurs="0"
+            maxOccurs="unbounded"/>
          <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
@@ -347,7 +342,7 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
-<!-- data type changed to NMTOKEN     -->
+      <!-- data type changed to NMTOKEN     -->
       <xs:attribute name="countryCode" type="xs:NMTOKEN"/>
       <xs:attribute name="valueURI" type="xs:anyURI"/>
       <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
@@ -395,7 +390,7 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
-<!--      added global lang & script attributes -->
+      <!--      added global lang & script attributes -->
       <xs:attribute name="languageOfElement">
          <xs:simpleType>
             <xs:restriction base="xs:token">
@@ -520,7 +515,7 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
-<!--      occurance changed to optional -->
+      <!--      occurance changed to optional -->
       <xs:attribute name="localType" type="xs:anyURI"/>
       <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
       <xs:attribute name="valueURI" type="xs:anyURI"/>
@@ -530,9 +525,7 @@
    </xs:complexType>
    <xs:complexType name="maintenanceHistory">
       <xs:sequence>
-         <xs:element type="eac:maintenanceEvent"
-                     name="maintenanceEvent"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:maintenanceEvent" name="maintenanceEvent" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
@@ -581,10 +574,7 @@
    </xs:complexType>
    <xs:complexType name="identity">
       <xs:sequence>
-         <xs:element type="eac:identityId"
-                     name="identityId"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:identityId" name="identityId" minOccurs="0" maxOccurs="unbounded"/>
          <xs:element type="eac:entityType" name="entityType"/>
          <xs:element type="eac:otherEntityTypes" name="otherEntityTypes" minOccurs="0"/>
          <xs:choice maxOccurs="unbounded">
@@ -620,9 +610,14 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
+      <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="description">
+<!--      add attributes -->
       <xs:choice minOccurs="0" maxOccurs="unbounded">
          <xs:element type="eac:biogHist" name="biogHist"/>
          <xs:element type="eac:existDates" name="existDates"/>
@@ -654,6 +649,9 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="relations">
@@ -776,6 +774,9 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="valueURI" type="xs:anyURI"/>
+      <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
+      <xs:attribute name="vocabularySourceURI" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="descriptiveNote">
@@ -811,7 +812,7 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
-<!--      lang attr added -->
+      <!--      lang attr added -->
       <xs:attribute name="languageOfElement">
          <xs:simpleType>
             <xs:restriction base="xs:token">
@@ -849,7 +850,7 @@
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="term" mixed="true">
-<!--  Ref attr added    -->
+      <!--  Ref attr added    -->
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -936,19 +937,17 @@
    </xs:complexType>
    <xs:complexType name="maintenanceEvent">
       <xs:sequence>
-       <!--  eac:eventType becomes attribute in maintenceevent
+         <!--  eac:eventType becomes attribute in maintenceevent
          <xs:element type="eac:eventType" name="eventType"/>-->
          <xs:element type="eac:eventDateTime" name="eventDateTime"/>
-        <!--   eac:agentType becomes attribute in maintenanceevent       
+         <!--   eac:agentType becomes attribute in maintenanceevent       
          <xs:element type="eac:agentType" name="agentType"/>-->
          <xs:element type="eac:agent" name="agent"/>
-         <xs:element type="eac:eventDescription"
-                     name="eventDescription"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:eventDescription" name="eventDescription" minOccurs="0"
+            maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
-<!--      new attribute -->
+      <!--      new attribute -->
       <xs:attribute name="agentType" use="required">
          <xs:simpleType>
             <xs:restriction base="xs:token">
@@ -991,13 +990,10 @@
    </xs:complexType>
    <xs:complexType name="source">
       <xs:sequence>
-<!--         use reference instead of sourcEntry -->
+         <!--         use reference instead of sourcEntry -->
          <!--<xs:element type="eac:sourceEntry" name="sourceEntry"/>-->
          <xs:element type="eac:reference" name="reference" minOccurs="0" maxOccurs="unbounded"/>
-         <xs:element type="eac:citedRange"
-                     name="citedRange"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:citedRange" name="citedRange" minOccurs="0" maxOccurs="unbounded"/>
          <xs:element type="eac:objectXMLWrap" name="objectXMLWrap" minOccurs="0"/>
          <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
       </xs:sequence>
@@ -1050,9 +1046,29 @@
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:attribute name="localType" type="xs:anyURI"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
+      <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="vocabularySource" type="xs:token"/>
+      <xs:attribute name="vocabularySourceURI">
+         <xs:simpleType>
+            <xs:restriction base="xs:anyURI">
+               <xs:pattern value="http[s]?://.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="valueURI">
+         <xs:simpleType>
+            <xs:restriction base="xs:anyURI">
+               <xs:pattern value="http[s]?://.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="entityType">
+<!--      remove localType-->
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1062,7 +1078,6 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="localType" type="xs:anyURI"/>
       <xs:attribute name="value" use="required">
          <xs:simpleType>
             <xs:restriction base="xs:token">
@@ -1075,10 +1090,9 @@
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="otherEntityTypes">
+<!--      attributes added -->
       <xs:sequence>
-         <xs:element type="eac:otherEntityType"
-                     name="otherEntityType"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:otherEntityType" name="otherEntityType" maxOccurs="unbounded"/>
          <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
@@ -1090,6 +1104,17 @@
             </xs:restriction>
          </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="languageOfElement">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:pattern value="[a-z]{2}.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="nameEntry">
@@ -1161,6 +1186,18 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="localType" type="xs:anyURI"/>
+      <xs:attribute name="languageOfElement">
+         <xs:simpleType>
+            <xs:restriction base="xs:token">
+               <xs:pattern value="[a-z]{2}.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
+      <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="biogHist">
@@ -1321,9 +1358,7 @@
    </xs:complexType>
    <xs:complexType name="localDescriptions">
       <xs:sequence>
-         <xs:element type="eac:localDescription"
-                     name="localDescription"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:localDescription" name="localDescription" maxOccurs="unbounded"/>
          <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
@@ -1447,19 +1482,13 @@
       <xs:sequence>
          <xs:element type="eac:targetEntity" name="targetEntity"/>
          <xs:element type="eac:relationType" name="relationType" maxOccurs="unbounded"/>
-         <xs:element type="eac:targetRole"
-                     name="targetRole"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:targetRole" name="targetRole" minOccurs="0" maxOccurs="unbounded"/>
          <xs:choice minOccurs="0">
             <xs:element type="eac:date" name="date"/>
             <xs:element type="eac:dateRange" name="dateRange"/>
             <xs:element type="eac:dateSet" name="dateSet"/>
          </xs:choice>
-         <xs:element type="eac:place"
-                     name="place"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:place" name="place" minOccurs="0" maxOccurs="unbounded"/>
          <xs:element type="eac:objectXMLWrap" name="objectXMLWrap" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
@@ -1491,10 +1520,8 @@
    </xs:complexType>
    <xs:complexType name="setComponent">
       <xs:sequence>
-         <xs:element type="eac:componentEntry"
-                     name="componentEntry"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:componentEntry" name="componentEntry" minOccurs="0"
+            maxOccurs="unbounded"/>
          <xs:element type="eac:objectXMLWrap" name="objectXMLWrap" minOccurs="0"/>
          <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
       </xs:sequence>
@@ -1644,7 +1671,7 @@
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
- <!--  <xs:complexType name="eventType">
+   <!--  <xs:complexType name="eventType">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1669,7 +1696,7 @@
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>-->
-<!--   allow eventDateTime to contain text -->
+   <!--   allow eventDateTime to contain text -->
    <xs:complexType name="eventDateTime" mixed="true">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
@@ -1695,7 +1722,7 @@
       </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-<!--   <xs:complexType name="agentType">
+   <!--   <xs:complexType name="agentType">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1756,9 +1783,9 @@
       <xs:attribute name="scriptOfElement" type="xs:token"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-<!--   use reference instead of sourceEntry-->
-   
-  <!-- <xs:complexType name="sourceEntry" mixed="true">
+   <!--   use reference instead of sourceEntry-->
+
+   <!-- <xs:complexType name="sourceEntry" mixed="true">
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1808,12 +1835,10 @@
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="otherEntityType">
+<!--      attributes added -->
       <xs:sequence>
          <xs:element type="eac:term" name="term" maxOccurs="unbounded"/>
-         <xs:element type="eac:placeName"
-                     name="placeName"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:placeName" name="placeName" minOccurs="0" maxOccurs="unbounded"/>
          <xs:choice minOccurs="0">
             <xs:element type="eac:date" name="date"/>
             <xs:element type="eac:dateRange" name="dateRange"/>
@@ -1839,9 +1864,30 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="localType" type="xs:anyURI"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
+      <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="vocabularySource" type="xs:token"/>
+      <xs:attribute name="vocabularySourceURI">
+         <xs:simpleType>
+            <xs:restriction base="xs:anyURI">
+               <xs:pattern value="http[s]?://.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="valueURI">
+         <xs:simpleType>
+            <xs:restriction base="xs:anyURI">
+               <xs:pattern value="http[s]?://.*"/>
+            </xs:restriction>
+         </xs:simpleType>
+      </xs:attribute>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="part" mixed="true">
+<!--      add attributes -->
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -1863,6 +1909,7 @@
       <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
       <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
       <xs:attribute name="sourceReference" type="xs:IDREF"/>
+      <xs:attribute name="localType" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="useDates">
@@ -1888,6 +1935,9 @@
          </xs:simpleType>
       </xs:attribute>
       <xs:attribute name="scriptOfElement" type="xs:token"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="abstract" mixed="true">
@@ -2059,10 +2109,7 @@
    <xs:complexType name="function">
       <xs:sequence>
          <xs:element type="eac:term" name="term" maxOccurs="unbounded"/>
-         <xs:element type="eac:placeName"
-                     name="placeName"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:placeName" name="placeName" minOccurs="0" maxOccurs="unbounded"/>
          <xs:choice minOccurs="0">
             <xs:element type="eac:date" name="date"/>
             <xs:element type="eac:dateRange" name="dateRange"/>
@@ -2092,24 +2139,16 @@
    </xs:complexType>
    <xs:complexType name="languageUsed">
       <xs:sequence>
-         <xs:element type="eac:language"
-                     name="language"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
-         <xs:element type="eac:writingSystem"
-                     name="writingSystem"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:language" name="language" minOccurs="0" maxOccurs="unbounded"/>
+         <xs:element type="eac:writingSystem" name="writingSystem" minOccurs="0"
+            maxOccurs="unbounded"/>
          <xs:element type="eac:descriptiveNote" name="descriptiveNote" minOccurs="0"/>
       </xs:sequence>
    </xs:complexType>
    <xs:complexType name="legalStatus">
       <xs:sequence>
          <xs:element type="eac:term" name="term" maxOccurs="unbounded"/>
-         <xs:element type="eac:placeName"
-                     name="placeName"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:placeName" name="placeName" minOccurs="0" maxOccurs="unbounded"/>
          <xs:choice minOccurs="0">
             <xs:element type="eac:date" name="date"/>
             <xs:element type="eac:dateRange" name="dateRange"/>
@@ -2140,10 +2179,7 @@
    <xs:complexType name="localDescription">
       <xs:sequence>
          <xs:element type="eac:term" name="term" maxOccurs="unbounded"/>
-         <xs:element type="eac:placeName"
-                     name="placeName"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:placeName" name="placeName" minOccurs="0" maxOccurs="unbounded"/>
          <xs:choice minOccurs="0">
             <xs:element type="eac:date" name="date"/>
             <xs:element type="eac:dateRange" name="dateRange"/>
@@ -2174,10 +2210,7 @@
    <xs:complexType name="mandate">
       <xs:sequence>
          <xs:element type="eac:term" name="term" maxOccurs="unbounded"/>
-         <xs:element type="eac:placeName"
-                     name="placeName"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:placeName" name="placeName" minOccurs="0" maxOccurs="unbounded"/>
          <xs:choice minOccurs="0">
             <xs:element type="eac:date" name="date"/>
             <xs:element type="eac:dateRange" name="dateRange"/>
@@ -2208,10 +2241,7 @@
    <xs:complexType name="occupation">
       <xs:sequence>
          <xs:element type="eac:term" name="term" maxOccurs="unbounded"/>
-         <xs:element type="eac:placeName"
-                     name="placeName"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:placeName" name="placeName" minOccurs="0" maxOccurs="unbounded"/>
          <xs:choice minOccurs="0">
             <xs:element type="eac:date" name="date"/>
             <xs:element type="eac:dateRange" name="dateRange"/>
@@ -2243,9 +2273,7 @@
       <xs:sequence>
          <xs:element type="eac:placeName" name="placeName" maxOccurs="unbounded"/>
          <xs:element type="eac:placeRole" name="placeRole" minOccurs="0"/>
-         <xs:element type="eac:geographicCoordinates"
-                     name="geographicCoordinates"
-                     minOccurs="0"/>
+         <xs:element type="eac:geographicCoordinates" name="geographicCoordinates" minOccurs="0"/>
          <xs:element type="eac:address" name="address" minOccurs="0"/>
          <xs:choice minOccurs="0">
             <xs:element type="eac:date" name="date"/>
@@ -2408,6 +2436,7 @@
       </xs:choice>
    </xs:complexType>
    <xs:complexType name="placeName" mixed="true">
+<!--  add attributes    -->
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
          <xs:simpleType>
@@ -2443,6 +2472,10 @@
       </xs:attribute>
       <!-- data type changed to NMTOKEN     -->
       <xs:attribute name="countryCode" type="xs:NMTOKEN"/>
+      <xs:attribute name="conventionDeclarationReference" type="xs:IDREF"/>
+      <xs:attribute name="maintenanceEventReference" type="xs:IDREF"/>
+      <xs:attribute name="sourceReference" type="xs:IDREF"/>
+      <xs:attribute name="localTypeDeclarationReference" type="xs:IDREF"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
    <xs:complexType name="item" mixed="true">
@@ -2473,10 +2506,7 @@
    <xs:complexType name="level">
       <xs:sequence>
          <xs:element type="eac:item" name="item" maxOccurs="unbounded"/>
-         <xs:element type="eac:level"
-                     name="level"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:level" name="level" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
       <xs:attribute name="audience">
@@ -2659,10 +2689,7 @@
    </xs:complexType>
    <xs:complexType name="chronItemSet">
       <xs:sequence>
-         <xs:element type="eac:placeName"
-                     name="placeName"
-                     minOccurs="0"
-                     maxOccurs="unbounded"/>
+         <xs:element type="eac:placeName" name="placeName" minOccurs="0" maxOccurs="unbounded"/>
          <xs:element type="eac:event" name="event" maxOccurs="unbounded"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:ID"/>
@@ -2705,7 +2732,7 @@
       <xs:attribute name="localType" type="xs:anyURI"/>
       <xs:anyAttribute namespace="##other" processContents="lax"/>
    </xs:complexType>
-<!--<!-\-   new vocabulary source attributes -\->
+   <!--<!-\-   new vocabulary source attributes -\->
    <xs:attributeGroup name="am.URIs">
       <xs:attribute name="valueURI" type="xs:anyURI"/>
       <xs:attribute name="vocabularySource" type="xs:NMTOKEN"/>
