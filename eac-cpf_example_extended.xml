@@ -1,0 +1,333 @@
+<!-- revision example file-->
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<eac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:isbn:1-931666-33-4 ../01_Schema/eac-cpf-schema-development_sija/xml-schemas/eac-cpf/cpf.xsd"
+    xmlns="urn:isbn:1-931666-33-4" audience="internal" id="eaccpf1" languageOfElement="en"
+    scriptOfElement="lat">
+    <control audience="external" countryEncoding="iso3166-1" dateEncoding="iso8601" id="control1"
+        languageEncoding="iso639-1" languageOfElement="en" maintanceStatus="new"
+        publicationStatus="inProcess" repositoryEncoding="iso15511" scriptEncoding="iso15924"
+        scriptOfElement="lat">
+        <recordId audience="external" id="recordid1" languageOfElement="en" scriptOfElement="lat"
+            >record identifier</recordId>
+        <otherRecordId audience="external" id="otherrecordid1" languageOfElement="en"
+            localType="localRecordId" localTypeDeclarationReference="localTypeDeclaration1"
+            scriptOfElement="lat" valueURI="recordURI" vocabularySource="recordVocabulary"
+            vocabularySourceURI="recordVocabularyURI">other record identifier</otherRecordId>
+        <representation audience="external" id="representation1" href="link to representation"
+            languageOfElement="en" lastDateTimeVerified="20209-11-09" localType="localRepresentation" localTypeDeclarationReference="localTypeDeclaration1" linkRole="roleOfLink" linkTitle="linktext" scriptOfElement="lat">text about representation; use case:
+            https://snaccooperative.org/view/44995506</representation>
+        <maintenanceAgency audience="external" countryCode="DE" id="maintenanceagency1"
+            languageOfElement="eng" scriptOfElement="lat" vocabularySource="ISIL_Agency"
+            vocabularySourceURI="http://ld.zdb-services.de/resource/organisations/"
+            valueURI="http://ld.zdb-services.de/resource/organisations/XYZ">
+            <agencyCode audience="external" id="agencycode1" languageOfElement="eng"
+                scriptOfElement="lat" status="authorized" valueURI="agencyCodeURI"
+                vocabularySource="ISIL" vocabularySourceURI="ISILURI">agency code</agencyCode>
+            <agencyName audience="external" id="agencyName1" languageOfElement="eng"
+                scriptOfElement="lat" valueURI="agencyNameURI" vocabularySource="VIAF"
+                vocabularySourceURI="VIAFURI">agency name</agencyName>
+            <otherAgencyCode audience="external" id="otherAgencyCode1" languageOfElement="eng"
+                localType="localAgencyCode" scriptOfElement="lat" status="alternative"
+                valueURI="otherAgencyCodeURI" vocabularySource="VIAF" vocabularySourceURI="VIAFURI"
+                >other agency code</otherAgencyCode>
+            <descriptiveNote>
+                <p>note for maintenance agency</p>
+            </descriptiveNote>
+        </maintenanceAgency>
+        <languageDeclaration audience="external" id="languageDeclaration1" languageOfElement="eng"
+            languageCode="eng" scriptOfElement="lat" scriptCode="Lat">
+            <descriptiveNote>
+                <p>text of the descriptive note</p>
+            </descriptiveNote>
+        </languageDeclaration>
+        <conventionDeclaration audience="external" id="conventiondeclaration1"
+            languageOfElement="en" localType="localtype"
+            localTypeDeclarationReference="localTypeDeclaration1" valueURI="conventionURI"
+            vocabularySource="source" vocabularySourceURI="sourceURI">
+            <shortCode audience="external" id="shortCode1" languageOfElement="en"
+                scriptOfElement="lat">acronym, abbreviation or short code of the
+                convention</shortCode>
+            <reference audience="external" entityref="entity" href="externallink" id="reference1"
+                languageOfElement="en" lastdatetimeverified="2020-09-04" linktitle="link"
+                linkrole="application/pdf" scriptOfElement="lat" target="internallink"
+                xpointer="xpointerlink">externe reference to the convention</reference>
+            <descriptiveNote>
+                <p>decriptive note for convention declaration</p>
+            </descriptiveNote>
+        </conventionDeclaration>
+        <rightsDeclaration audience="external" id="rightsdeclaration1" languageOfElement="en"
+            localType="localtype" scriptOfElement="lat" valueURI="conventionURI"
+            vocabularySource="source" vocabularySourceURI="sourceURI">
+            <shortCode audience="external" id="shortCode2" languageOfElement="en"
+                scriptOfElement="lat">acronym, abbreviation or short code of the
+                convention</shortCode>
+            <reference audience="external" entityref="entity" href="externallink" id="reference2"
+                languageOfElement="en" lastdatetimeverified="2020-09-04" linktitle="link"
+                linkrole="application/pdf" scriptOfElement="lat" target="internallink"
+                xpointer="xpointerlink">externe reference to the convention</reference>
+            <descriptiveNote>
+                <p>descriptive note for rights declaration</p>
+            </descriptiveNote>
+        </rightsDeclaration>
+        <localTypeDeclaration audience="external" id="localTypeDeclaration1" languageOfElement="en"
+            localType="localtype" scriptOfElement="lat" valueURI="conventionURI"
+            vocabularySource="source" vocabularySourceURI="sourceURI">
+            <shortCode audience="external" id="shortCode3" languageOfElement="en"
+                scriptOfElement="lat">acronym, abbreviation or short code of the local
+                type</shortCode>
+            <reference audience="external" entityref="entity" href="externallink" id="reference3"
+                languageOfElement="en" lastdatetimeverified="2020-09-04" linktitle="link"
+                linkrole="application/pdf" scriptOfElement="lat" target="internallink"
+                xpointer="xpointerlink">externe reference to the local type</reference>
+            <descriptiveNote>
+                <p>descriptive note for the local type</p>
+            </descriptiveNote>
+        </localTypeDeclaration>
+        <localControl audience="external" id="localContraol1" languageOfElement="en"
+            localType="localtype" localTypeDeclarationReference="localTypeDeclaration1"
+            scriptOfElement="lat" valueURI="conventionURI" vocabularySource="source"
+            vocabularySourceURI="sourceURI">
+            <term>term for local control</term>
+            <date audience="external" certainty="circa" conventionDeclarationReference="conventiondeclaration1" id="date1" languageOfElement="en" localType="localDate1" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" notAfter="2020" notBefore="2010" scriptOfElement="lat" sourceReference="source1" standardDate="2015">date
+                of local control</date>
+        </localControl>
+        <maintenanceHistory audience="external" id="maintenancehistory1" languageOfElement="de"
+            scriptOfElement="lat">
+            <maintenanceEvent agentType="human" audience="external" id="maintenancevent1"
+                languageOfElement="de" maintenanceEventType="created" scriptOfElement="lat">
+                <eventDateTime audience="external" id="eventdatetime1" languageOfElement="de"
+                    scriptOfElement="lat" standardDateTime="2020-07-01T13:01:48"
+                    >01.07.2020</eventDateTime>
+                <agent audience="external" id="agent1" languageOfElement="de" scriptOfElement="lat"
+                    valueURI="URIagencyName" vocabularySource="authorityFileName"
+                    vocabularySourceURI="authorityFileURI">agent name</agent>
+                <eventDescription audience="external" id="eventdescription1" languageOfElement="de"
+                    scriptOfElement="lat">description of the maintenance event</eventDescription>
+            </maintenanceEvent>
+        </maintenanceHistory>
+        <sources audience="external" base="baseURI" id="sources1" languageOfElement="eng"
+            scriptOfElement="lat">
+            <source audience="external" id="source1" href="link to source" languageOfElement="eng"
+                lastDateTimeVerified="2020" linkRole="linkrole" linkTitle="linktext"
+                scriptOfElement="lat" valueURI="sourceURI" vocabularySource="vocabularyName"
+                vocabularySourceURI="vocabularyNameURI">
+                <reference>internal or external reference to a source</reference>
+                <citedRange audience="external" id="citedRang1" languageOfElement="eng"
+                    scriptOfElement="lat" unit="pagenumber">p. 1</citedRange>
+                <objectXMLWrap>
+                    <anyelementofanynamespace/>
+                </objectXMLWrap>
+                <descriptiveNote>
+                    <p>descriptive note for a source</p>
+                </descriptiveNote>
+            </source>
+            <descriptiveNote>
+                <p>description for all sources</p>
+            </descriptiveNote>
+        </sources>
+    </control>
+    <multipleIdentities audience="external" id="multipleidentities1">
+        <cpfDescription audience="external" base="baseURI"
+            conventionDeclarationReference="conventiondeclaration1" id="cpfDescription1"
+            languageOfElement="eng" maintenanceEventReference="maintenancevent1"
+            scriptOfElement="lat" sourceReference="source1">
+            <identity audience="external" base="identiybaseURI"
+                conventionDeclarationReference="conventiondeclaration1" id="identity1"
+                identityType="given" languageOfElement="en" localType="localtype"
+                localTypeDeclarationReference="localTypeDeclaration1"
+                maintenanceEventReference="maintenancevent1" scriptOfElement="lat"
+                sourceReference="source1">
+                <identityId audience="external"
+                    conventionDeclarationReference="conventiondeclaration1" id="identityId1"
+                    languageOfElement="en" localType="localtype"
+                    localTypeDeclarationReference="localTypeDeclaration1"
+                    maintenanceEventReference="maintenancevent1" scriptOfElement="lat"
+                    sourceReference="source1" vocabularySource="identityIdVocabulary"
+                    vocabularySourceURI="http://identityIdVocabularyURI"
+                    valueURI="https://identyIdURI">identity identifier</identityId>
+                <entityType audience="external" id="entitytype1" value="family"/>
+                <otherEntityTypes audience="external"
+                    conventionDeclarationReference="conventiondeclaration1" id="otherentitytypes1"
+                    languageOfElement="en" maintenanceEventReference="maintenancevent1"
+                    scriptOfElement="lat" sourceReference="source1">
+                    <otherEntityType audience="external"
+                        conventionDeclarationReference="conventiondeclaration1"
+                        id="otherEntityType1" languageOfElement="en" localType="localentitytype"
+                        localTypeDeclarationReference="localTypeDeclaration1"
+                        maintenanceEventReference="maintenancevent1" scriptOfElement="lat"
+                        sourceReference="source1" valueURI="http://valueURI"
+                        vocabularySource="source" vocabularySourceURI="http://sourceURI">
+                        <term>term for other entity type</term>
+                        <placeName audience="external"
+                            conventionDeclarationReference="conventiondeclaration1" countryCode="DE"
+                            id="placeName1" languageOfElement="en" localType="loacalplacetype1"
+                            localTypeDeclarationReference="localTypeDeclaration1"
+                            maintenanceEventReference="maintenancevent1" scriptOfElement="lat"
+                            sourceReference="source1" valueURI="http://placeNameURI"
+                            vocabularySource="source" vocabularySourceURI="http://sourceURI">place
+                            entry for other entity type</placeName>
+                        <date>date for other entity type</date>
+                        <reference>citation for other entity type</reference>
+                        <descriptiveNote>
+                            <p>descriptive note for other entity type</p>
+                        </descriptiveNote>
+                    </otherEntityType>
+                    <otherEntityType>
+                        <term>term for other entity type</term>
+                    </otherEntityType>
+                    <descriptiveNote>
+                        <p>descriptive note for other entity types</p>
+                    </descriptiveNote>
+                </otherEntityTypes>
+                <nameEntrySet audience="external"
+                    conventionDeclarationReference="conventiondeclaration1" id="nameEntrySet1"
+                    languageOfElement="en" localType="localNameEntryset"
+                    localTypeDeclarationReference="localTypeDeclaration1"
+                    maintenanceEventReference="maintenancevent1" scriptOfElement="lat"
+                    sourceReference="source1">
+                    <nameEntry audience="external"
+                        conventionDeclarationReference="conventiondeclaration1" id="nameentry1"
+                        languageOfElement="en" localType="localtype"
+                        localTypeDeclarationReference="localTypeDeclaration1"
+                        maintenanceEventReference="maintenancevent1" preferredForm="true"
+                        scriptOfElement="lat" sourceReference="source1" status="authorized"
+                        valueURI="http://nameURI" vocabularySource="VIAF"
+                        vocabularySourceURI="http://viaf.org/viaf/data">
+                        <part audience="external"
+                            conventionDeclarationReference="conventiondeclaration1" id="part1"
+                            languageOfElement="en" localType="localPart"
+                            localTypeDeclarationReference="localTypeDeclaration1"
+                            maintenanceEventReference="maintenancevent1" scriptOfElement="lat"
+                            sourceReference="source1">name part</part>
+                        <useDates audience="external"
+                            conventionDeclarationReference="conventiondeclaration1" id="useDates"
+                            languageOfElement="en" maintenanceEventReference="maintenancevent1"
+                            scriptOfElement="lat" sourceReference="source1">
+                            <dateSet audience="external" conventionDeclarationReference="conventiondeclaration1" id="dateSet1" languageOfElement="en" localType="localDateSet" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                                <dateRange>
+                                    <fromDate standardDate="1947">1947</fromDate>
+                                    <toDate standardDate="1949">1949</toDate>
+                                </dateRange>
+                                <date>1951</date>
+                            </dateSet>
+                        </useDates>
+                    </nameEntry>
+                    <nameEntry>
+                        <part>name part</part>
+                    </nameEntry>
+                    <useDates>
+                        <date>use date of name</date>
+                    </useDates>
+                </nameEntrySet>
+                <nameEntry status="alternative">
+                    <part localType="GitHubName">fordmadox</part>
+                    <useDates>
+                           <dateRange>
+                               <fromDate>2011</fromDate>
+                               <toDate status="ongoing"/>
+                           </dateRange>
+                    </useDates>
+                </nameEntry>
+                <descriptiveNote>
+                    <p>descriptive note for an identity</p>
+                </descriptiveNote>
+            </identity>
+            <description audience="external" base="baseURL" conventionDeclarationReference="conventiondeclaration1" id="description1" languageOfElement="en" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                <biogHist audience="external" conventionDeclarationReference="conventiondeclaration1" id="biogHist1" languageOfElement="en" localType="localBiogHist" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+<!--                    child elements to be defined -->
+                    <abstract audience="external" conventionDeclarationReference="conventiondeclaration1" id="abstract1" languageOfElement="en" localType="localAbstract" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">brief <span style="bold">summary</span> of the information contained within the <reference href="https://biography.com">biography</reference> or history as a whole</abstract>
+                    <chronList audience="external" conventionDeclarationReference="conventiondeclaration1" id="chronList1" languageOfElement="en" localType="localChronList" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                        <chronItem audience="external" conventionDeclarationReference="conventiondeclaration1" id="chronItem1" languageOfElement="en" localType="localChronItem" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                            <date>date of a list item</date>
+                            <chronItemSet audience="external" conventionDeclarationReference="conventiondeclaration1" id="chronItemSet1" languageOfElement="en" localType="localChronItemSet" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                                <placeName>place of the event or list item</placeName>
+                                <event>event of the list item</event>
+                                <event>another event of the list item</event>
+                            </chronItemSet>
+                        </chronItem>
+                        <chronItem>
+                            <dateRange>
+                                <fromDate>start date for a list item</fromDate>
+                                <toDate>end date for a list item</toDate>
+                            </dateRange>
+                            <placeName>place of the event or list item</placeName>
+                            <event>event of the list item</event>
+                        </chronItem>
+                        <chronItem>
+                            <dateSet>
+                                <date>single date of the list item</date>
+                                <dateRange>
+                                    <fromDate>start date for a list item</fromDate>
+                                    <toDate>end date for a list item</toDate>
+                                </dateRange>
+                            </dateSet>
+                            <event>event of the list item</event>
+                        </chronItem>
+                    </chronList>
+                    <list audience="external" conventionDeclarationReference="conventiondeclaration1" languageOfElement="en" listType="unordered" localType="localList1" localTypeDeclarationReference="localTypeDeclaration1" mark="circle" maintenanceEventReference="maintenancevent1" numeration="decimal" id="list1" scriptOfElement="lat" sourceReference="source1">
+                        <item audience="external" conventionDeclarationReference="conventiondeclaration1" id="item1" languageOfElement="en" localType="localItem" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">direktor</item>
+                    </list>
+                    <p><span style="font-style:bold">Header</span>extended desription of biography or history</p>
+                    <p>text with <reference href="https:externalLink.com">link to reference</reference> in text</p>
+                    <p><reference href="https:externalLink.com">link to reference</reference></p>
+                    <reference href="https:externalLink.com">link to reference</reference>
+                </biogHist>
+                <existDates audience="external" conventionDeclarationReference="conventiondeclaration1" id="existDates1" languageOfElement="en" localType="existDates" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                    <dateRange audience="external" conventionDeclarationReference="conventiondeclaration1" id="dateRange1" languageOfElement="en" localType="localDateRange1" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                        <fromDate audience="external" certainty="circa" conventionDeclarationReference="conventiondeclaration1" id="fromDate1" languageOfElement="en" localType="localFromDate" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" notAfter="2019" notBefore="1900" scriptOfElement="lat" sourceReference="source1" standardDate="2010-12-31" status="ongoing">start date of existence</fromDate>
+                        <toDate audience="external" certainty="circa" conventionDeclarationReference="conventiondeclaration1" id="toDate1" languageOfElement="en" localType="localToDate" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" notAfter="2019" notBefore="1900" scriptOfElement="lat" sourceReference="source1" standardDate="2010-12-31" status="ongoing">end date of existence</toDate>
+                    </dateRange>
+                    <descriptiveNote>
+                        <p>descriptive Note for dates of existence</p>
+                    </descriptiveNote>
+                </existDates>
+<!--               weiter -->
+                <places audience="external" conventionDeclarationReference="conventiondeclaration1" id="places1" languageOfElement="en" localType="localPlaces" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                    <place audience="external" conventionDeclarationReference="conventiondeclaration1" id="place1" languageOfElement="en" localType="localplace" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1" valueURI="http://www.geonames.org/2950159/berlin.html" vocabularySource="GeoNames" vocabularySourceURI="http://www.geonames.org">
+                        <placeName audience="external" conventionDeclarationReference="conventiondeclaration1" countryCode="DE" id="placename1" languageOfElement="en" localType="localPlaceName" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1" valueURI="http://www.geonames.org/7303381/rosslyn-chapel.html" vocabularySource="GeoNames" vocabularySourceURI="http://www.geonames.org">name of the place</placeName>
+                        <placeRole audience="external" conventionDeclarationReference="conventiondeclaration1" id="placeRole1" languageOfElement="en" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1" valueURI="http://vocabularySource.uri/placeRole" vocabularySourceURI="http://vocabularySource.uri" vocabularySource="sourceofvocabulary">example place</placeRole>
+                        <geographicCoordinates audience="external" conventionDeclarationReference="conventiondeclaration1" coordinateSystem="WGS84" id="geoco1" languageOfElement="lat" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">N 52° 31' 27'', E 13° 24' 37''</geographicCoordinates>
+                        <address audience="external" conventionDeclarationReference="conventiondeclaration1" id="address1" languageOfElement="en" localType="localAdress" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                            <addressLine audience="external" addressLineType="street" conventionDeclarationReference="conventiondeclaration1" languageOfElement="en" localType="localadressline" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" id="adressline1" scriptOfElement="lat" sourceReference="source1">  distinct address information</addressLine></address>
+                        <contact audience="external" conventionDeclarationReference="conventiondeclaration1" languageOfElement="en" localType="localcontact" localTypeDeclarationReference="localTypeDeclaration1" id="contact1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1">
+                            <contactLine audience="internal" contactLineType="fax" conventionDeclarationReference="conventiondeclaration1" id="contactLine1" languageOfElement="en" localType="localcontactline" localTypeDeclarationReference="localTypeDeclaration1" maintenanceEventReference="maintenancevent1" scriptOfElement="lat" sourceReference="source1" href="www.fax.com" linkRole="fax" linkTitle="Fax" lastDateTimeVerified="2020-11-15">distinct contact information</contactLine>
+                        </contact>
+                        <dateSet>
+                            <date>1950</date>
+                            <dateRange>
+                                 <fromDate>1970</fromDate>
+                                <toDate status="ongoing"/>
+                            </dateRange>
+                        </dateSet>
+                        <reference>external reference for the place</reference>
+                        <descriptiveNote>
+                            <p>note for this place</p>
+                        </descriptiveNote>
+                    </place>
+                    <descriptiveNote>
+                        <p>note for all places</p>
+                    </descriptiveNote>
+                </places>
+<!--                weiter -->
+                <functions>[...]</functions>
+                <generalContext>[...]</generalContext>
+                <languagesUsed>[...] <languageUsed>
+                        <language languageCode="">[...]</language>
+                        <script scriptCode=""/>
+                    </languageUsed>
+                </languagesUsed>
+                <legalStatuses>[...]</legalStatuses>
+                <localDescriptions localType="">[...]</localDescriptions>
+                <mandates>[...]</mandates>
+                <occupations>[...]</occupations>
+                <structureOrGenealogy>[...]</structureOrGenealogy>
+            </description>
+        </cpfDescription>
+        <cpfDescription audience="external" id="cpfdescription2">
+            <identity>
+                <entityType/>
+            </identity>
+        </cpfDescription>
+    </multipleIdentities>
+</eac>
