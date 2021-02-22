@@ -6,47 +6,53 @@
 
     <define name="element.relations">
         <element name="relations">
-            <ref name="attribute-group.global.optional"/>
+            <ref name="attribute-group.global-plus-base-lang-and-script.optional"/>
+            <ref name="attribute-group.assertion-reference.optional"/>
             <oneOrMore>
                 <ref name="element.relation"/>
             </oneOrMore>
+            <ref name="element.descriptiveNote.optional"/>
         </element>
     </define>
     
     <define name="element.relation">
         <element name="relation">
             <ref name="attribute-group.global-plus-lang-and-script.optional"/>
+            <!-- are these being removed?  not listed in issue 214 
             <ref name="attribute-group.links.optional"/>
-            <ref name="attribute.lastDateTimeVerified.optional"/>
+            -->
+            <ref name="attribute-group.assertion-reference.optional"/>
             <ref name="element.targetEntity"/>
-            <oneOrMore>
-                <ref name="element.relationType"/>
-            </oneOrMore>
-            <zeroOrMore>
-                <ref name="element.targetRole"/>
-            </zeroOrMore>
             <optional>
                 <ref name="model.all-dates.choice"/>
             </optional>
-            
-            <!-- why placeEntry (now placeName, when we could just add place???... would also get placeRole, that way, etc. -->
             <zeroOrMore>
-                <ref name="element.place"/>
+                <choice>
+                    <ref name="element.place"/>
+                    <ref name="element.relationType"/>
+                    <ref name="element.targetRole"/>
+                </choice>
             </zeroOrMore>
+            <ref name="element.descriptiveNote.optional"/>
             <ref name="element.objectXMLWrap.optional"/>
         </element>
     </define>
     
     <define name="element.targetEntity">
         <element name="targetEntity">
+            <ref name="attribute.targetType"/>
+            <!-- no localType here, apparently -->
             <ref name="attribute-group.relation-children.optional"/>
-            <text/>
+            <oneOrMore>
+                <ref name="element.part"/>
+            </oneOrMore>
         </element>
     </define>
     
     <define name="element.relationType">
         <element name="relationType">
             <ref name="attribute-group.relation-children.optional"/>
+            <ref name="attribute-group.localType.optional"/>
             <text/>
         </element>
     </define>
@@ -54,6 +60,7 @@
     <define name="element.targetRole">
         <element name="targetRole">
             <ref name="attribute-group.relation-children.optional"/>
+            <ref name="attribute-group.localType.optional"/>
             <text/>
         </element>
     </define>
